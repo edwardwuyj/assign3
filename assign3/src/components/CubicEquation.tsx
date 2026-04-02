@@ -1,5 +1,6 @@
 ﻿import type { CubicCoefficients } from "../types";
 
+// format values for display
 function formatValue(value: number) {
   return Number.isFinite(value) ? value.toFixed(4) : String(value);
 }

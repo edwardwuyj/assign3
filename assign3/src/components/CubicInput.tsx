@@ -1,5 +1,6 @@
 ﻿import type { CubicCoefficients } from "../types";
 
+// Props define the data and callbacks passed from App.
 interface Props {
   coefficients: CubicCoefficients;
   onChange: (coeffs: CubicCoefficients) => void;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export default function CubicInput({ coefficients, onChange, onSave }: Props) {
+  // Convert the text input into a number and update the selected coefficient.
   const handleChange = (key: keyof CubicCoefficients, value: string) => {
     onChange({
       ...coefficients,

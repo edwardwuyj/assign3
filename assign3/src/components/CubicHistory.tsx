@@ -8,8 +8,7 @@ interface Props {
 export default function CubicHistory({ history, onSelect }: Props) {
   return (
     <div className="rounded-3xl bg-white p-6 shadow-xl border border-slate-200">
-      
-      {/* Header */}
+      {/* Header section for the saved history panel */}
       <div className="mb-5">
         <h2 className="text-xl font-bold text-slate-800">
           Saved Equations
@@ -19,7 +18,6 @@ export default function CubicHistory({ history, onSelect }: Props) {
         </p>
       </div>
 
-      {/* Empty State */}
       {history.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-10 text-center text-sm text-slate-500">
           No saved equations yet.
@@ -29,7 +27,7 @@ export default function CubicHistory({ history, onSelect }: Props) {
           
           <table className="min-w-full text-sm">
             
-            {/* Table Head */}
+            //table head
             <thead className="bg-slate-100">
               <tr>
                 {["a", "b", "c", "d"].map((label) => (
@@ -43,7 +41,7 @@ export default function CubicHistory({ history, onSelect }: Props) {
               </tr>
             </thead>
 
-            {/* Table Body */}
+            //table body
             <tbody>
               {history.map((item, index) => (
                 <tr

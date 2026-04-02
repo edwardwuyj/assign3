@@ -6,8 +6,10 @@ interface Props {
 }
 
 export default function CubicGraph({ coefficients }: Props) {
+  // Reference to the <canvas> element so we can draw on it directly.
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Redraw the graph whenever the coefficients change.
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
