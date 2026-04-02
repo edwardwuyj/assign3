@@ -5,9 +5,8 @@ import CubicGraph from "./components/CubicGraph";
 import CubicHistory from "./components/CubicHistory";
 import type { CubicCoefficients } from "./types";
 
-// Main application component.
-// Stores the current cubic coefficients and a history of saved sets.
-// Passes state and update callbacks down into child components.
+// main application component
+// store the current cubic coefficients and a histor
 export default function App() {
   const [coefficients, setCoefficients] = useState<CubicCoefficients>({
     a: 0,
@@ -18,8 +17,8 @@ export default function App() {
 
   const [history, setHistory] = useState<CubicCoefficients[]>([]);
 
-  // Add the current coefficients into the history list.
-  // The history is used later to restore saved equations.
+  // add the current coefficients into the history list
+  // the history is used later to restore saved equations
   const handleSave = () => {
     setHistory([...history, coefficients]);
   };
