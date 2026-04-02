@@ -1,46 +1,53 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import CubicInput from "./components/CubicInput";
+import CubicEquation from "./components/CubicEquation";
+import CubicGraph from "./components/CubicGraph";
+import CubicHistory from "./components/CubicHistory";
+import type { CubicCoefficients } from "./types";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [coefficients, setCoefficients] = useState<CubicCoefficients>({
+    a: 0,
+    b: 0,
+    c: 0,
+    d: 0,
+  });
+
+  const [history, setHistory] = useState<CubicCoefficients[]>([]);
+
+  const handleSave = () => {
+    setHistory([...history, coefficients]);
+  };
 
   return (
-    <>
-    </>
-  )
-}
+  <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+    
+    <div className="w-full max-w-5xl p-6 space-y-6">
+      
+      <h1 className="text-3xl font-bold text-center text-slate-800">
+        Cubic Function Calculator
+      </h1>
 
-export default App
+      <div className="grid md:grid-cols-2 gap-6">
+        <CubicInput
+          coefficients={coefficients}
+          onChange={setCoefficients}
+          onSave={handleSave}
+        />
 
-function solveCubic(a: number, b: number, c: number, d: number) {
-  const p = (3 * a * c - b ** 2) / (3 * a * a);
-  const q = (2 * b ** 3 - 9 * a * b * c + 27 * a * a * d) / (27 * a ** 3);
-  const discriminant = q * q / 4 + p * p * p / 27;
-  const shift = -b / (3 * a);
+        <CubicEquation {...coefficients} />
+      </div>
 
-  if (discriminant > 0) {
-    const u = Math.cbrt(-q / 2 + Math.sqrt(discriminant));
-    const v = Math.cbrt(-q / 2 - Math.sqrt(discriminant));
-    return { p, q, discriminant, roots: [u + v + shift, "Complex", "Complex"] };
-  }
+      <CubicGraph coefficients={coefficients} />
 
-  if (discriminant === 0) {
-    const u = Math.cbrt(-q / 2);
-    return { p, q, discriminant, roots: [2 * u + shift, -u + shift, -u + shift] };
-  }
+      <CubicHistory
+        history={history}
+        onSelect={setCoefficients}
+      />
 
-  const r = Math.sqrt(-p * 3 / 27);
-  const theta = Math.acos(-q / (2 * r));
-  const t = 2 * Math.cbrt(r);
+    </div>
+  </div>
+);
 
-  return {
-    p,
-    q,
-    discriminant,
-    roots: [
-      t * Math.cos(theta / 3) + shift,
-      t * Math.cos((theta + 2 * Math.PI) / 3) + shift,
-      t * Math.cos((theta + 4 * Math.PI) / 3) + shift,
-    ],
-  };
+
 }
